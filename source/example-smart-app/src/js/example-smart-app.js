@@ -14,11 +14,11 @@
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
-                    //   code: {
-                    //     $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
-                    //           'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
-                    //           'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
-                    //   }
+                      code: {
+                        $or: ['http://loinc.org|8302-2', 'http://loinc.org|8462-4',
+                              'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
+                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
+                      }
                     }
                   });
 
@@ -71,6 +71,19 @@
           p.ldl = getQuantityValueAndUnit(ldl[0]);
 
           ret.resolve(p);
+
+          var cond = smart.patient.api.fetchAll({
+                      type: 'Condition',
+                      query: {
+                      }
+                    });
+
+          $.when(pt, cond).fail(onError);
+
+          $.when(pt, cond).done(function(patient, cond) {
+            console.log(cond);
+          }
+
         });
       } else {
         onError();
@@ -79,6 +92,7 @@
 
     FHIR.oauth2.ready(onReady, onError);
     return ret.promise();
+
 
   };
 
