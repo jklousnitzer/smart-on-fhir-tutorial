@@ -72,17 +72,17 @@
 
           ret.resolve(p);
 
-          var cond = smart.patient.api.fetchAll({
-                      type: 'Condition',
-                      query: {
-                      }
-                    });
-
-          $.when(pt, cond).fail(onError);
-
-          $.when(pt, cond).done(function(patient, cond) {
-            console.log(cond);
-          }
+          // var cond = smart.patient.api.fetchAll({
+          //             type: 'Condition',
+          //             query: {
+          //             }
+          //           });
+          //
+          // $.when(pt, cond).fail(onError);
+          //
+          // $.when(pt, cond).done(function(patient, cond) {
+          //   console.log(cond);
+          // }
 
         });
       } else {
